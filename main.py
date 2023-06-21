@@ -31,7 +31,7 @@ from ticket import TravelTicketTool
 from exp import TravelExpTool
 
 # CWB Weather Tools
-from weather import WeatherTool
+from weather import WeatherDataTool
 
 from linebot import (
     AsyncLineBotApi, WebhookParser
@@ -65,7 +65,8 @@ parser = WebhookParser(channel_secret)
 
 # Langchain (you must use 0613 model to use OpenAI functions.)
 model = ChatOpenAI(model="gpt-3.5-turbo-0613")
-tools = [TravelPOITool(), TravelTicketTool(), TravelExpTool(), WeatherTool()]
+tools = [TravelPOITool(), TravelTicketTool(),
+         TravelExpTool(), WeatherDataTool()]
 
 open_ai_agent = initialize_agent(tools,
                                  model,
