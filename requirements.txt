@@ -6,3 +6,4 @@ openai
 yfinance
 pydantic
 tiktoken
+duckduckgo-search

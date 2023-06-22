@@ -24,6 +24,8 @@ from langchain.chat_models import ChatOpenAI
 from langchain.agents import AgentType
 from langchain.agents import initialize_agent, Tool
 from langchain.schema import HumanMessage
+from langchain.tools import DuckDuckGoSearchRun
+
 
 # LINE Travel Tools
 from poi import TravelPOITool
@@ -67,7 +69,7 @@ parser = WebhookParser(channel_secret)
 # Langchain (you must use 0613 model to use OpenAI functions.)
 model = ChatOpenAI(model="gpt-3.5-turbo-0613")
 tools = [TravelPOITool(), TravelTicketTool(),
-         TravelExpTool(), WeatherDataTool(), ProductTool()]
+         TravelExpTool(), WeatherDataTool(), ProductTool(), DuckDuckGoSearchRun()]
 
 open_ai_agent = initialize_agent(tools,
                                  model,
