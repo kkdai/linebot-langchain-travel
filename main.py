@@ -96,11 +96,12 @@ async def handle_callback(request: Request):
         if not isinstance(event.message, TextMessage):
             continue
 
-        tool_result = open_ai_agent.run(event.message.text)
-
-        await line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=tool_result)
-        )
+        if event.message.text.startswith(":gpt"):
+            msg = event.message.text.replace(":gpt", "")
+            tool_result = open_ai_agent.run(event.message.text)
+            await line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=tool_result)
+            )
 
     return 'OK'
