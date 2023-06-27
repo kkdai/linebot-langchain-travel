@@ -1,59 +1,46 @@
-Utilizing a LINE Bot integrated with LangChain in Python to assist with stock price inquiries
-==============
+# Langchain LINE Bot
 
-![](./img/bot2.jpg)
+This project is an implementation of a LINE Bot using FastAPI, OpenAI's GPT-3.5 model and multiple tools for different functions like weather data, travel POIs, tickets, experiences, and product data.
 
-Installation and Usage
-=============
+## Features
 
-### 1. Got A LINE Bot API devloper account
+- Automated text responses using OpenAI's GPT-3.5 model.
+- Integrated with various tools including:
+  - TravelPOITool: to provide point of interest information for travel related queries.
+  - TravelTicketTool: to provide ticket information for travel related queries.
+  - TravelExpTool: to provide travel experience related data.
+  - WeatherDataTool: to provide weather data.
+  - ProductTool: to provide product related data.
+  - DuckDuckGoSearchRun: to provide search functionality using DuckDuckGo.
 
-- [Make sure you already registered on LINE developer console](https://developers.line.biz/console/), if you need use LINE Bot.
+## Installation
 
-- Create new Messaging Channel
-- Get `Channel Secret` on "Basic Setting" tab.
-- Issue `Channel Access Token` on "Messaging API" tab.
-- Open LINE OA manager from "Basic Setting" tab.
-- Go to Reply setting on OA manager, enable "webhook"
+To install the necessary dependencies for this project, use:
 
-### 2. To obtain an OpenAI API token
+```sh
+pip install fastapi aiohttp linebot python-dotenv
+```
 
-- Register for an account on the OpenAI website at <https://openai.com/api/>.
-- Once you have an account, you can find your [API Keys](https://platform.openai.com/account/api-keys) in the account settings page.
-- If you want to use the OpenAI API for development, you can find more information and instructions in the API documentation page.
-- Please note that the OpenAI API is only available to users who meet certain criteria.
-- You can find more information about the usage conditions and limitations of the API in the API documentation page.
+Additionally, you'll need to setup the environment variables `ChannelSecret` and `ChannelAccessToken` in a `.env` file at your project's root directory.
 
-### 3. Deploy this on Web Platform
+## Usage
 
-You can choose [Heroku](https://www.heroku.com/) or [Render](http://render.com/)
+Once you've cloned this repository and installed the necessary dependencies, you can run the FastAPI server with the command:
 
-### 4. Deploy this on Heroku
+```sh
+uvicorn main:app --reload
+```
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+Replace `main` with the name of your Python file.
 
-- Input `Channel Secret` and `Channel Access Token`.
-- Input [OpenAI API Key](https://platform.openai.com/account/api-keys) in `OPENAI_API_KEY`.
-- Remember your heroku, ID.
+The bot will listen for POST requests on the `/callback` endpoint. It processes text messages sent by users, using OpenAI's GPT-3.5 model to generate responses if the incoming message starts with `:gpt`.
 
-### 5. Go to LINE Bot Dashboard, setup basic API
+## Contributing
 
-- Setup your basic account information. Here is some info you will need to know.
-- `Callback URL`: <https://{YOUR_HEROKU_SERVER_ID}.herokuapp.com/callback>
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-It all done.
+Please make sure to update the tests as appropriate.
 
-License
----------------
+## License
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-<http://www.apache.org/licenses/LICENSE-2.0>
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+This project is licensed under the terms of the MIT license.
