@@ -96,11 +96,14 @@ async def handle_callback(request: Request):
         if not isinstance(event.message, TextMessage):
             continue
 
+        msg = event.message.text
+
         # if in group room
         if event.source.type in ['group', 'room']:
             if event.message.text.startswith(":gpt"):
                 msg = event.message.text.replace(":gpt", "")
             else:
+                print("In group/room, Not a command", event.message.text)
                 continue
 
         tool_result = open_ai_agent.run(msg)
